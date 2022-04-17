@@ -1,5 +1,7 @@
 #include "pch.hpp"
+
 #include "chapter1.hpp"
+#include "chapter2.hpp"
 
 using namespace cv;
 using namespace std;
@@ -13,6 +15,6 @@ int main(){
    Mat img = imread(path);
    imshow("Image", img);
     waitKey(0);*/
-    chapter1();
+    chapter2();
     return 0;
 }
