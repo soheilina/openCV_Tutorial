@@ -5,9 +5,10 @@
 #include "chapter3.hpp"
 #include "chapter4.hpp"
 #include "chapter5.hpp"
+#include "chapter6.hpp"
+#include "chapter7.hpp"
 
 int main(){
-    
-    chapter5();
+    chapter7();
     return 0;
 }
