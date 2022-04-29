@@ -69,5 +69,15 @@ int getInputFromUser(int input, int minVal, int maxVal){
     }
 }
 
+/** @brief Finds cotoures of objects in a dilated image and stores them in a 2D vector of points. Then print number of found objects out.
+    @param imgDil a dilated image created from a canny image
+    @param contoures an empty 2D vector of points to store contoures that are found
+*/
+void getContoures(cv::Mat& imgDil, std::vector<std::vector<cv::Point>>& contoures){
+    std::vector<cv::Vec4i> hierarchy;
+
+    cv::findContours(imgDil, contoures, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
+}
+
 }
 #endif

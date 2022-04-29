@@ -1,19 +1,8 @@
 #include "pch.hpp"
 
-/** @brief Finds cotoures of objects in a dilated image and stores them in a 2D vector of points. Then print number of found objects out.
-    @param imgDil a dilated image created from a canny image
-    @param contoures an empty 2D vector of points to store contoures that are found
-*/
-void getContoures(cv::Mat& imgDil, std::vector<std::vector<cv::Point>>& contoures){
-    std::vector<cv::Vec4i> hierarchy;
-
-    cv::findContours(imgDil, contoures, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-
-    std::cout << "The number of detected shapes is: " << contoures.size() << std::endl;
-}
-
 /** @brief Draws contoures, a polygon for each object conecting its corners, and bounding boxes.
-           The type of each object is recognized based on number of its corners and is shown besides each bounding box.
+           The type of each object is recognized based on number of its corners stored in cornerPolygon.
+           The type of each object is shown besides each bounding box.
     @param img an image
     @param contoures a 2D vector of points. Found contoures have been stored in it.
 */
@@ -40,7 +29,7 @@ void detectObjects(cv::Mat img, std::vector<std::vector<cv::Point>>& contoures){
             boundingRectangule[i] = cv::boundingRect(contoures[i]);
             cv::rectangle(img, boundingRectangule[i].tl(), boundingRectangule[i].br(), cv::Scalar(0, 255, 0), 2);
 
-            // Detect every object
+            // Detect every object based on its corners
             std::string objectType;
             uint8_t numberOfCorners = static_cast<uint8_t>(cornerPolygon[i].size());
             if(numberOfCorners==3){
@@ -76,7 +65,8 @@ void chapter7(){
     // ---> Get contoures <---
     // contoures is an Nx2 matrix. N is number of detected shapes. Every row has two points describing a contoure of a shape.
     std::vector<std::vector<cv::Point>> contoures;
-    getContoures(imgDil, contoures);
+    utilities::getContoures(imgDil, contoures);
+    std::cout << "The number of detected shapes is: " << contoures.size() << std::endl;
 
     // ---> Detect objects <---
     detectObjects(img, contoures);
