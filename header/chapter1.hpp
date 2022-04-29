@@ -31,16 +31,6 @@ void showWebcam(){
     }
 }
 
-int getInputFromUser(int input){
-    if(input>0 && input<=3){
-        return input;
-    } else {
-        std::cout << "Your input is out of range. Please try again:" << std::endl;
-        std::cin >> input;
-        return getInputFromUser(input);
-    }
-}
-
 void chapter1(){
     const std::string path = "../resource/";
     int input{0};
@@ -49,7 +39,7 @@ void chapter1(){
               << "(2) to show a video, "
               << "(3) to open the webcam" << std::endl;
     std::cin >> input;
-    switch (getInputFromUser(input)){
+    switch (utilities::getInputFromUser(input, 1, 3)){
         case 1:{
             showImage(path);
             break;

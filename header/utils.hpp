@@ -10,7 +10,7 @@ namespace utilities
  * @param hMax Hue max value
  * @param sMin Saturation min value
  * @param sMax Saturation max value
- * @param vMin Value max value
+ * @param vMin Value min value
  * @param vMax Value max value
 */
 void createTrackbars(int& hMin, int& hMax, int& sMin, int& sMax, int& vMin, int& vMax){
@@ -50,6 +50,22 @@ void findColorsFromWebcam(){
         cv::imshow("frame Mask", frameMask);
         cv::waitKey(1);
         std::cout << hMin << " " << hMax << " " << sMin << " " << sMax << " " << vMin << " " << vMax << std::endl;
+    }
+    
+}
+
+/** @brief It gets intut from user to know wihch function should be run. If the input is invalid, the user has to try again.
+ *  @param intput: the enterd input by user
+ *  @param minVal: minimum value of range
+ *  @param maxVal: maximum value of range
+ */
+int getInputFromUser(int input, int minVal, int maxVal){
+    if(input>=minVal || input<=maxVal){
+        return input;
+    } else {
+        std::cout << "You entered an invalid value. Please try again!" << std::endl;
+        std::cin >> input;
+        return getInputFromUser(input, minVal, maxVal);
     }
 }
 
